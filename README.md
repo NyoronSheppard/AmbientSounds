@@ -1,4 +1,0 @@
-AmbientSounds
-=============
-
-Android Aplication
