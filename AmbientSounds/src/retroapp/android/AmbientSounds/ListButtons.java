@@ -10,7 +10,7 @@ package retroapp.android.AmbientSounds;
 public class ListButtons 
 {
 	//Constantes
-	private final int KMAX = 6;
+	private final int KMAX = 7;
 
 
 	//Variables
@@ -70,7 +70,7 @@ public class ListButtons
 		buttonlist[1] = new ButtonSound("Spring Weather", "springweather");
 		buttonlist[1].setId(R.raw.springweather);
 
-		buttonlist[2] = new ButtonSound("Street alley Ambience", "streetalleyambience");
+		buttonlist[2] = new ButtonSound("Street Alley Ambience", "streetalleyambience");
 		buttonlist[2].setId(R.raw.streetalleyambience);
 
 		buttonlist[3] = new ButtonSound("Street Traffic", "streettraffic");
@@ -81,6 +81,9 @@ public class ListButtons
 
 		buttonlist[5] = new ButtonSound("Train Station Hall", "trainstationhall");
 		buttonlist[5].setId(R.raw.trainstationhall);
+		
+		buttonlist[6] = new ButtonSound("No Petes", "yyy");
+		buttonlist[6].setId(R.raw.yyy);
 
 	}
 
