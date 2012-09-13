@@ -1,5 +1,4 @@
-telepathy
+AmbientSounds
 =========
 
-09/08/2012 -> Inicio Proyecto.
-09/08/2012 -> Probando Git compartido.
+13/09/2012 --> Inicio Proyecto (creando repositorio)
