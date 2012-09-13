@@ -23,7 +23,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 public class AmbientSounds extends Activity 
 {
 	//Constantes
-	public final int KMAX = 5;
+	public final int KMAX = 6;
 		
 		
 	//Variables	

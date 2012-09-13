@@ -10,7 +10,7 @@ package retroapp.android.AmbientSounds;
 public class ListButtons 
 {
 	//Constantes
-	private final int KMAX = 5;
+	private final int KMAX = 6;
 
 
 	//Variables
@@ -78,6 +78,9 @@ public class ListButtons
 
 		buttonlist[4] = new ButtonSound("Wood Logs", "woodlogs");
 		buttonlist[4].setId(R.raw.woodlogs);
+		
+		buttonlist[5] = new ButtonSound("Prueba el Loop", "yyy");
+		buttonlist[5].setId(R.raw.yyy);
 
 	}
 
