@@ -23,13 +23,11 @@ public final class R {
         public static final int main=0x7f030001;
     }
     public static final class raw {
-        public static final int restaurant=0x7f040000;
-        public static final int springweather=0x7f040001;
-        public static final int streetalleyambience=0x7f040002;
-        public static final int streettraffic=0x7f040003;
-        public static final int traininterior=0x7f040004;
-        public static final int trainstationhall=0x7f040005;
-        public static final int yyy=0x7f040006;
+        public static final int businterior=0x7f040000;
+        public static final int lakewaves=0x7f040001;
+        public static final int oceanwave=0x7f040002;
+        public static final int waterdripping=0x7f040003;
+        public static final int woodlogs=0x7f040004;
     }
     public static final class string {
         public static final int app_name=0x7f050001;

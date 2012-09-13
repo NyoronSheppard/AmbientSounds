@@ -10,7 +10,7 @@ package retroapp.android.AmbientSounds;
 public class ListButtons 
 {
 	//Constantes
-	private final int KMAX = 7;
+	private final int KMAX = 5;
 
 
 	//Variables
@@ -64,26 +64,20 @@ public class ListButtons
 	public void setButtons()
 	{
 
-		buttonlist[0] = new ButtonSound("Restaurant", "restaurant");
-		buttonlist[0].setId(R.raw.restaurant);
+		buttonlist[0] = new ButtonSound("Bus Interior", "businterior");
+		buttonlist[0].setId(R.raw.businterior);
 
-		buttonlist[1] = new ButtonSound("Spring Weather", "springweather");
-		buttonlist[1].setId(R.raw.springweather);
+		buttonlist[1] = new ButtonSound("Lake Waves", "lakewaves");
+		buttonlist[1].setId(R.raw.lakewaves);
 
-		buttonlist[2] = new ButtonSound("Street Alley Ambience", "streetalleyambience");
-		buttonlist[2].setId(R.raw.streetalleyambience);
+		buttonlist[2] = new ButtonSound("Ocean Wave", "oceanwave");
+		buttonlist[2].setId(R.raw.oceanwave);
 
-		buttonlist[3] = new ButtonSound("Street Traffic", "streettraffic");
-		buttonlist[3].setId(R.raw.streettraffic);
+		buttonlist[3] = new ButtonSound("Water Dripping", "waterdripping");
+		buttonlist[3].setId(R.raw.waterdripping);
 
-		buttonlist[4] = new ButtonSound("Train Interior", "traininterior");
-		buttonlist[4].setId(R.raw.traininterior);
-
-		buttonlist[5] = new ButtonSound("Train Station Hall", "trainstationhall");
-		buttonlist[5].setId(R.raw.trainstationhall);
-		
-		buttonlist[6] = new ButtonSound("No Petes", "yyy");
-		buttonlist[6].setId(R.raw.yyy);
+		buttonlist[4] = new ButtonSound("Wood Logs", "woodlogs");
+		buttonlist[4].setId(R.raw.woodlogs);
 
 	}
 
