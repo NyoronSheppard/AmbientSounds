@@ -21,6 +21,7 @@ public class ButtonSound
 	/**
 	 * Constructor parametizado
 	 * @param titlesound Titulo del sonido
+	 * @param namesound Nombre del archivo .mp3
 	 */
 	public ButtonSound(String titlesound, String namesound)
 	{

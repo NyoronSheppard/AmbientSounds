@@ -10,7 +10,7 @@ package retroapp.android.AmbientSounds;
 public class ListButtons 
 {
 	//Constantes
-	private final int KMAX = 6;
+	private final int KMAX = 15;
 
 
 	//Variables
@@ -64,23 +64,50 @@ public class ListButtons
 	public void setButtons()
 	{
 
-		buttonlist[0] = new ButtonSound("Bus Interior", "businterior");
-		buttonlist[0].setId(R.raw.businterior);
+		buttonlist[0] = new ButtonSound("Canary Trills", "canarytrills");
+		buttonlist[0].setId(R.raw.canarytrills);
 
-		buttonlist[1] = new ButtonSound("Lake Waves", "lakewaves");
-		buttonlist[1].setId(R.raw.lakewaves);
+		buttonlist[1] = new ButtonSound("Earthquake", "earthquake");
+		buttonlist[1].setId(R.raw.earthquake);
 
-		buttonlist[2] = new ButtonSound("Ocean Wave", "oceanwave");
-		buttonlist[2].setId(R.raw.oceanwave);
+		buttonlist[2] = new ButtonSound("Jungle", "jungle");
+		buttonlist[2].setId(R.raw.jungle);
 
-		buttonlist[3] = new ButtonSound("Water Dripping", "waterdripping");
-		buttonlist[3].setId(R.raw.waterdripping);
+		buttonlist[3] = new ButtonSound("Peak Cock", "peakcock");
+		buttonlist[3].setId(R.raw.peakcock);
 
-		buttonlist[4] = new ButtonSound("Wood Logs", "woodlogs");
-		buttonlist[4].setId(R.raw.woodlogs);
+		buttonlist[4] = new ButtonSound("Pinch", "pinch");
+		buttonlist[4].setId(R.raw.pinch);
 		
-		buttonlist[5] = new ButtonSound("Prueba el Loop", "yyy");
-		buttonlist[5].setId(R.raw.yyy);
+		buttonlist[5] = new ButtonSound("Rain", "rain");
+		buttonlist[5].setId(R.raw.rain);
+		
+		buttonlist[6] = new ButtonSound("Rattle Snake", "rattlesnake");
+		buttonlist[6].setId(R.raw.rattlesnake);
+
+		buttonlist[7] = new ButtonSound("Rocks", "rocks");
+		buttonlist[7].setId(R.raw.rocks);
+
+		buttonlist[8] = new ButtonSound("Tidal Wave", "tidalwave");
+		buttonlist[8].setId(R.raw.tidalwave);
+
+		buttonlist[9] = new ButtonSound("Walking Water", "walkingwater");
+		buttonlist[9].setId(R.raw.walkingwater);
+
+		buttonlist[10] = new ButtonSound("Water Drain", "waterdrain");
+		buttonlist[10].setId(R.raw.waterdrain);
+		
+		buttonlist[11] = new ButtonSound("Water Rice", "waterice");
+		buttonlist[11].setId(R.raw.waterice);
+		
+		buttonlist[12] = new ButtonSound("Water Pump Siphon", "waterpumpsiphon");
+		buttonlist[12].setId(R.raw.waterpumpsiphon);
+
+		buttonlist[13] = new ButtonSound("Wind", "wind");
+		buttonlist[13].setId(R.raw.wind);
+
+		buttonlist[14] = new ButtonSound("Wood Pecker", "woodpecker");
+		buttonlist[14].setId(R.raw.woodpecker);
 
 	}
 

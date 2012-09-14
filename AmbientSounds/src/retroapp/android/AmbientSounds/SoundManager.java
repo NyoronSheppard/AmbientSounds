@@ -29,7 +29,7 @@ public class SoundManager
 	 */
 	public SoundManager(Context appContext)
 	{
-		sndPool = new SoundPool(6, AudioManager.STREAM_MUSIC, 100);
+		sndPool = new SoundPool(15, AudioManager.STREAM_MUSIC, 100);
 	   	pContext = appContext;
 	}
 	    

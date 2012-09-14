@@ -23,12 +23,21 @@ public final class R {
         public static final int main=0x7f030001;
     }
     public static final class raw {
-        public static final int businterior=0x7f040000;
-        public static final int lakewaves=0x7f040001;
-        public static final int oceanwave=0x7f040002;
-        public static final int waterdripping=0x7f040003;
-        public static final int woodlogs=0x7f040004;
-        public static final int yyy=0x7f040005;
+        public static final int canarytrills=0x7f040000;
+        public static final int earthquake=0x7f040001;
+        public static final int jungle=0x7f040002;
+        public static final int peakcock=0x7f040003;
+        public static final int pinch=0x7f040004;
+        public static final int rain=0x7f040005;
+        public static final int rattlesnake=0x7f040006;
+        public static final int rocks=0x7f040007;
+        public static final int tidalwave=0x7f040008;
+        public static final int walkingwater=0x7f040009;
+        public static final int waterdrain=0x7f04000a;
+        public static final int waterice=0x7f04000b;
+        public static final int waterpumpsiphon=0x7f04000c;
+        public static final int wind=0x7f04000d;
+        public static final int woodpecker=0x7f04000e;
     }
     public static final class string {
         public static final int app_name=0x7f050001;

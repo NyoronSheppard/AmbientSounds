@@ -23,7 +23,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 public class AmbientSounds extends Activity 
 {
 	//Constantes
-	public final int KMAX = 6;
+	public final int KMAX = 15;
 		
 		
 	//Variables	
@@ -150,7 +150,7 @@ public class AmbientSounds extends Activity
             	int position = (Integer)v.getTag(); 
             	//int idPlay;
             	
-            	seleccionado.setText("Has seleccionado: \n" + buttons[position].getId()); //buttons[position].getTitleSound()); 
+            	seleccionado.setText("Has seleccionado: \n" + buttons[position].getTitleSound()); 
             	
             	if(buttons[position].getPlay() == false)
             	{
