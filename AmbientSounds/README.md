@@ -11,3 +11,5 @@ AmbientSounds
 14/09/2012 --> Borrada (por ahora) rama MediaPlayer
 14/09/2012 --> Añadida la función stop() a los sonidos
 14/09/2012 --> Actualizados sonidos
+14/09/2012 --> Insertados los metodos get y set de streamId
+14/09/2012 --> Arreglada la función stop()
