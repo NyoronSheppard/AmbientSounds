@@ -1,4 +1,4 @@
-AmbientSounds
+﻿AmbientSounds
 =========
 
 13/09/2012 --> Inicio Proyecto (creando repositorio)
@@ -13,3 +13,4 @@ AmbientSounds
 14/09/2012 --> Actualizados sonidos
 14/09/2012 --> Insertados los metodos get y set de streamId
 14/09/2012 --> Arreglada la función stop()
+14/09/2012 --> Prueba ordenador coffearmy
