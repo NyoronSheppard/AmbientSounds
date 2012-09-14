@@ -8,7 +8,7 @@ import android.media.SoundPool;
  * Clase encargada de administrar el sonido
  * @author AlisBlack
  * @date   13/09/2012
- * @version 0.1.5
+ * @version 0.1.7
  */
 public class SoundManager 
 {
@@ -29,7 +29,7 @@ public class SoundManager
 	 */
 	public SoundManager(Context appContext)
 	{
-		sndPool = new SoundPool(16, AudioManager.STREAM_MUSIC, 100);
+		sndPool = new SoundPool(6, AudioManager.STREAM_MUSIC, 100);
 	   	pContext = appContext;
 	}
 	    
@@ -51,7 +51,7 @@ public class SoundManager
      */
     public int setPlay(int sound_id)
     {
-    	return sndPool.play(sound_id, leftVolume, rightVolume, 1, 0, rate);
+    	return sndPool.play(sound_id, leftVolume, rightVolume, 1, -1, rate);
     }
 	    
     /**

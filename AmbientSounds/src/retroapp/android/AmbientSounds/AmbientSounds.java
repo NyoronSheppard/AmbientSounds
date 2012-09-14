@@ -18,7 +18,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
  * Clase Principal
  * @author AlisBlack
  * @date 13/09/2012
- * @version 0.0.5
+ * @version 0.0.6
  */
 public class AmbientSounds extends Activity 
 {
@@ -88,6 +88,7 @@ public class AmbientSounds extends Activity
     	//AudioManager soundManager;
     	 
         Activity context;
+        private int idPlay = -100; //Valor inicial de streamId
         
         
         //RingtoneManager ringTone = new RingtoneManager(context);
@@ -147,13 +148,22 @@ public class AmbientSounds extends Activity
             {                    	
 
             	int position = (Integer)v.getTag(); 
-            	int idPlay;
+            	//int idPlay;
             	
-            	seleccionado.setText("Has seleccionado: \n" + buttons[position].getId()); //buttons[position].getTitleSound());            	           	
+            	seleccionado.setText("Has seleccionado: \n" + buttons[position].getId()); //buttons[position].getTitleSound()); 
             	
-            	idPlay = snd.setPlay(buttons[position].getId()); 
+            	if(buttons[position].getPlay() == false)
+            	{
+            		idPlay = snd.setPlay(buttons[position].getId()); 
+            		buttons[position].isPlaySong(true);
+            	}
+            	else
+            	{
+            		snd.setStop(idPlay);
+            		buttons[position].isPlaySong(false);
+            	}
             	
-            	snd.setLoop(idPlay, -1);
+            	//snd.setLoop(idPlay, -1);
            		
             }
                        

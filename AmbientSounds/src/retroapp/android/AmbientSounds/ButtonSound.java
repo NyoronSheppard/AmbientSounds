@@ -4,7 +4,7 @@ package retroapp.android.AmbientSounds;
 * Clase Button
 * @author AlisBlack
 * @date 13/09/2012
-* @version 0.0.5
+* @version 0.0.6
 */
 public class ButtonSound 
 {
@@ -13,6 +13,7 @@ public class ButtonSound
 	private String titlesound;
 	private String namesound;
 	private int id;
+	private boolean isPlay;
 
 
 	//Constructor
@@ -26,6 +27,7 @@ public class ButtonSound
 		this.titlesound = new String(titlesound);
 		this.namesound = new String(namesound);
 		this.id = -1;
+		this.isPlay = false;
 	}
 
 
@@ -55,6 +57,15 @@ public class ButtonSound
 	{
 		return (id);
 	}
+	
+	/**
+	 * Metodo para obtener si esta sonando o no
+	 * @return isPlay Booleano
+	 */
+	public boolean getPlay()
+	{
+		return (isPlay);
+	}
 
 	/**
 	 * Metodo para cambiar la id
@@ -72,6 +83,15 @@ public class ButtonSound
 	public void setNameSound(String namesound)
 	{
 		this.namesound = namesound;
+	}
+	
+	/**
+	 * Metodo para cambiar si el sonido esta ejecutandose o no
+	 * @param isPlay Booleano
+	 */
+	public void isPlaySong(boolean isPlay)
+	{
+		this.isPlay = isPlay;
 	}
 
 }
