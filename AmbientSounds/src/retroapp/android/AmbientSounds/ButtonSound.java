@@ -4,7 +4,7 @@ package retroapp.android.AmbientSounds;
 * Clase Button
 * @author AlisBlack
 * @date 13/09/2012
-* @version 0.0.6
+* @version 0.0.8
 */
 public class ButtonSound 
 {
@@ -13,7 +13,9 @@ public class ButtonSound
 	private String titlesound;
 	private String namesound;
 	private int id;
+	private int streamId;
 	private boolean isPlay;
+
 
 
 	//Constructor
@@ -29,6 +31,7 @@ public class ButtonSound
 		this.namesound = new String(namesound);
 		this.id = -1;
 		this.isPlay = false;
+		this.streamId = -1;
 	}
 
 
@@ -67,6 +70,15 @@ public class ButtonSound
 	{
 		return (isPlay);
 	}
+	
+	/**
+	 * Metodo para obtener la streamId del sonido
+	 * @return streamId Int identificador
+	 */
+	public int getStreamId()
+	{
+		return (streamId);
+	}
 
 	/**
 	 * Metodo para cambiar la id
@@ -84,6 +96,15 @@ public class ButtonSound
 	public void setNameSound(String namesound)
 	{
 		this.namesound = namesound;
+	}
+	
+	/**
+	 * Metodo para cambiar el streamId
+	 * @param streamId Int que indica el id al hacer play
+	 */
+	public void setStreamId(int streamId)
+	{
+		this.streamId = streamId;
 	}
 	
 	/**

@@ -18,7 +18,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
  * Clase Principal
  * @author AlisBlack
  * @date 13/09/2012
- * @version 0.0.7
+ * @version 0.0.8
  */
 public class AmbientSounds extends Activity 
 {
@@ -155,11 +155,12 @@ public class AmbientSounds extends Activity
             	if(buttons[position].getPlay() == false)
             	{
             		idPlay = snd.setPlay(buttons[position].getId()); 
+            		buttons[position].setStreamId(idPlay); //Guardamos la Stream para saber dirigir las funciones play / stop
             		buttons[position].isPlaySong(true);
             	}
             	else
             	{
-            		snd.setStop(idPlay);
+            		snd.setStop(buttons[position].getStreamId());
             		buttons[position].isPlaySong(false);
             	}
             	
