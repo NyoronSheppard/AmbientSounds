@@ -14,3 +14,5 @@
 14/09/2012 --> Insertados los metodos get y set de streamId
 14/09/2012 --> Arreglada la función stop()
 14/09/2012 --> Prueba ordenador coffearmy
+
+15/09/2012 --> Insertada barra Seekbar

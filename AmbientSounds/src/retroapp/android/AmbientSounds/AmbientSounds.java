@@ -20,7 +20,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
  * Clase Principal
  * @author AlisBlack
  * @date 13/09/2012
- * @version 0.0.8
+ * @version 0.0.9
  */
 public class AmbientSounds extends Activity 
 {
@@ -143,20 +143,22 @@ public class AmbientSounds extends Activity
                 holder.volume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 					
 					@Override
-					public void onStopTrackingTouch(SeekBar seekBar) {
+					public void onStopTrackingTouch(SeekBar seekBar) 
+					{
 						// TODO Auto-generated method stub
 						
 					}
 					
 					@Override
-					public void onStartTrackingTouch(SeekBar seekBar) {
+					public void onStartTrackingTouch(SeekBar seekBar) 
+					{
 						// TODO Auto-generated method stub
 						
 					}
 					
 					@Override
-					public void onProgressChanged(SeekBar seekBar, int progress,
-							boolean fromUser) {
+					public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) 
+					{
 						//buttons[(Integer) seekBar.getTag()].setVolume((float)progress/100);
 						snd.setVolumeSong(buttons[(Integer) seekBar.getTag()].getId(), (float)progress/100);
 					}

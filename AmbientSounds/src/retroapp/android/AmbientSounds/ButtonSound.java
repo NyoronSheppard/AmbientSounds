@@ -82,8 +82,8 @@ public class ButtonSound
 		return (streamId);
 	}
 	/**
-	 * 
-	 * @return
+	 * Metodo para obtener el volumen del sonido
+	 * @return volume Float con el volumen
 	 */
 	public Float getVolume() {
 		return volume;
@@ -117,6 +117,15 @@ public class ButtonSound
 	}
 	
 	/**
+	 * Metodo para cambiar el volumen
+	 * @param volume Float que contiene el volumen
+	 */
+	public void setVolume(Float volume)
+	{
+		this.volume=volume;
+	}
+	
+	/**
 	 * Metodo para cambiar si el sonido esta ejecutandose o no
 	 * @param isPlay Booleano
 	 */
@@ -124,13 +133,8 @@ public class ButtonSound
 	{
 		this.isPlay = isPlay;
 	}
-	/**
-	 * 
-	 * @param volume
-	 */
-	public void setVolume(Float volume){
-		this.volume=volume;
-	}
+	
+
 	
 	
 	

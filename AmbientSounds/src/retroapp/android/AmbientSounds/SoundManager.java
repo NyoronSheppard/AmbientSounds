@@ -8,7 +8,7 @@ import android.media.SoundPool;
  * Clase encargada de administrar el sonido
  * @author AlisBlack
  * @date   13/09/2012
- * @version 0.1.7
+ * @version 0.1.8
  */
 public class SoundManager 
 {
