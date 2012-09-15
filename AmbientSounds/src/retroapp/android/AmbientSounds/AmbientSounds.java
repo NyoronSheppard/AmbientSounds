@@ -11,6 +11,8 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.MediaController;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
@@ -78,6 +80,7 @@ public class AmbientSounds extends Activity
     static class ViewHolder 
     {
         Button titlesound;
+        SeekBar volume;
     }
     
     /**
@@ -123,7 +126,7 @@ public class AmbientSounds extends Activity
                     //Creamos el ViewHolder y guardamos los ID del Objeto
                     holder = new ViewHolder();
                     holder.titlesound = (Button)item.findViewById(R.id.LblTitulo);
-
+                    holder.volume = (SeekBar)item.findViewById(R.id.seekBVolume);
                     item.setTag(holder);
                 }
                 else
@@ -135,7 +138,30 @@ public class AmbientSounds extends Activity
                 holder.titlesound.setText(buttons[position].getTitleSound());                       
                	holder.titlesound.setTag(position);
                 holder.titlesound.setOnClickListener(this);
-
+                holder.volume.setProgress(100);
+                holder.volume.setTag(position);
+                holder.volume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+					
+					@Override
+					public void onStopTrackingTouch(SeekBar seekBar) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void onStartTrackingTouch(SeekBar seekBar) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void onProgressChanged(SeekBar seekBar, int progress,
+							boolean fromUser) {
+						//buttons[(Integer) seekBar.getTag()].setVolume((float)progress/100);
+						snd.setVolumeSong(buttons[(Integer) seekBar.getTag()].getId(), (float)progress/100);
+					}
+				});
+                
                 
                 return(item);
             }
@@ -185,5 +211,20 @@ public class AmbientSounds extends Activity
             finish();
         }
         return super.onKeyDown(keyCode, event);
+    }
+    
+    //cuando pasa a segundo plano la aplicacion
+    @Override
+    protected void onPause() {
+    	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
+        finish();
+    	super.onPause();
+    }
+    //cuando se destruye la aplicacion
+    @Override
+    protected void onStop() {
+    	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
+        finish();
+    	super.onStop();
     }
 }

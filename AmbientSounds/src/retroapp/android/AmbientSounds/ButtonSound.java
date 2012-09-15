@@ -15,6 +15,7 @@ public class ButtonSound
 	private int id;
 	private int streamId;
 	private boolean isPlay;
+	private Float volume;
 
 
 
@@ -32,6 +33,7 @@ public class ButtonSound
 		this.id = -1;
 		this.isPlay = false;
 		this.streamId = -1;
+		this.volume=0.0f;
 	}
 
 
@@ -79,6 +81,13 @@ public class ButtonSound
 	{
 		return (streamId);
 	}
+	/**
+	 * 
+	 * @return
+	 */
+	public Float getVolume() {
+		return volume;
+	}
 
 	/**
 	 * Metodo para cambiar la id
@@ -115,5 +124,15 @@ public class ButtonSound
 	{
 		this.isPlay = isPlay;
 	}
+	/**
+	 * 
+	 * @param volume
+	 */
+	public void setVolume(Float volume){
+		this.volume=volume;
+	}
+	
+	
+	
 
 }

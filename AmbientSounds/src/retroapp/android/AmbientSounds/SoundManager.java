@@ -99,6 +99,11 @@ public class SoundManager
         }
  
     }
+    
+    public void setVolumeSong(int streamID, float volume)
+    {
+    	sndPool.setVolume(streamID, volume, volume);
+    }
 	    
     /**
      * Metodo para controlar la velocidad
