@@ -1,7 +1,11 @@
 package retroapp.android.AmbientSounds;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -27,6 +31,7 @@ public class AmbientSounds extends Activity
 {
 	//Constantes
 	public final int KMAX = 15;
+	private static final int NOTIF_ALERTA_ID = 1;
 		
 		
 	//Variables	
@@ -114,7 +119,7 @@ public class AmbientSounds extends Activity
 						{
 							snd.setStop(buttons[j].getStreamId());
 							buttons[j].isPlaySong(false);
-							buttons[j].isStopFuncion(false);
+							buttons[j].isPauseFuncion(false);
 						}
 					}
 					
@@ -124,7 +129,7 @@ public class AmbientSounds extends Activity
 					
 					for(int j = 0; j < KMAX; j++)
 					{
-						if(buttons[j].getStopFuncion() == true)
+						if(buttons[j].getPauseFuncion() == true)
 						{
 							buttons[j].isPlaySong(true); //Para poder parar el sonido en modo Resume
 						}
@@ -139,7 +144,7 @@ public class AmbientSounds extends Activity
 					{
 						if(buttons[j].getPlay() == true)
 						{
-							buttons[j].isStopFuncion(true);
+							buttons[j].isPauseFuncion(true);
 						}
 					}
 					
@@ -307,11 +312,44 @@ public class AmbientSounds extends Activity
         {
         	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
             finish();
+        	
+        	//Obtenemos una referencia al servicio de notificaciones
+			/*String ns = Context.NOTIFICATION_SERVICE;
+			NotificationManager notManager = (NotificationManager) getSystemService(ns);
+			
+			//Configuramos la notificacion
+			int icono = android.R.drawable.stat_sys_warning;
+			CharSequence textoEstado = "Ambient Sounds";
+			long hora = System.currentTimeMillis();
+
+			Notification notif = new Notification(icono, textoEstado, hora);
+			
+			//Configuramos el Intent
+			Context contexto = getApplicationContext();
+			CharSequence titulo = "Second Plane";
+			CharSequence descripcion = "Elisa es Cute";
+			
+			Intent notIntent = new Intent(contexto, AmbientSounds.class);
+			
+			PendingIntent contIntent = PendingIntent.getActivity(contexto, 0, notIntent, 0);
+
+			notif.setLatestEventInfo(contexto, titulo, descripcion, contIntent);
+			
+			//AutoCancel: cuando se pulsa la notificai�n �sta desaparece
+			notif.flags |= Notification.FLAG_AUTO_CANCEL;
+			
+			//Añadir sonido, vibracion y luces
+			//notif.defaults |= Notification.DEFAULT_SOUND;
+			//notif.defaults |= Notification.DEFAULT_VIBRATE;
+			//notif.defaults |= Notification.DEFAULT_LIGHTS;
+			
+			//Enviar notificacion
+			notManager.notify(NOTIF_ALERTA_ID, notif);*/
         }
         return super.onKeyDown(keyCode, event);
     }
     
-    //cuando pasa a segundo plano la aplicacion
+/*    //cuando pasa a segundo plano la aplicacion
     @Override
     protected void onPause() 
     {
@@ -326,5 +364,5 @@ public class AmbientSounds extends Activity
     	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
         finish();
     	super.onStop();
-    }
+    }*/
 }

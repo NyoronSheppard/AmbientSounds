@@ -15,7 +15,7 @@ public class ButtonSound
 	private int id;
 	private int streamId;
 	private boolean isPlay;
-	private boolean isStop; //Booleano de la funcion stopAll, utilizada tambien en resumeAll
+	private boolean isPause; //Booleano de la funcion stopAll, utilizada tambien en resumeAll
 	private Float volume;
 
 
@@ -35,7 +35,7 @@ public class ButtonSound
 		this.isPlay = false;
 		this.streamId = -1;
 		this.volume = 0.0f;
-		this.isStop = false;
+		this.isPause = false;
 	}
 
 
@@ -95,9 +95,9 @@ public class ButtonSound
 	 * Metodo para obtener si ha entrado en la funcion stopAll o no
 	 * @return isStop Booleano
 	 */
-	public boolean getStopFuncion()
+	public boolean getPauseFuncion()
 	{
-		return (isStop);
+		return (isPause);
 	}
 
 	/**
@@ -149,9 +149,9 @@ public class ButtonSound
 	 * Metodo para ver si ha entrado en la funcion o no
 	 * @param isStop
 	 */
-	public void isStopFuncion(boolean isStop)
+	public void isPauseFuncion(boolean isStop)
 	{
-		this.isStop = isStop;
+		this.isPause = isStop;
 	}
 	
 
