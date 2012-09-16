@@ -32,7 +32,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
  * Clase Principal
  * @author AlisBlack
  * @date 13/09/2012
- * @version 0.1.6
+ * @version 0.1.7
  */
 public class AmbientSounds extends Activity 
 {
