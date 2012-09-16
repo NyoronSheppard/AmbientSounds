@@ -16,3 +16,5 @@
 14/09/2012 --> Prueba ordenador coffearmy
 
 15/09/2012 --> Insertada barra Seekbar
+16/09/2012 --> Implementados Resume y Stop Buttons
+16/09/2012 --> SeekBar de origen general no funciona correctamente
