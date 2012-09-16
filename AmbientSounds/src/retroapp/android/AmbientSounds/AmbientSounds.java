@@ -110,21 +110,15 @@ public class AmbientSounds extends Activity
 				{
 					for(int j = 0; j < KMAX; j++)
 					{
-						if(buttons[j].getPlay() == true)
+						if(buttons[j].getStreamId() != -1)
 						{
-							buttons[j].isStopFuncion(true);
+							snd.setStop(buttons[j].getStreamId());
+							buttons[j].isPlaySong(false);
+							buttons[j].isStopFuncion(false);
 						}
 					}
 					
-					snd.pauseAll();
-					
-					//Si se pausan los sonidos, booleano a false
-					for(int i = 0; i < KMAX; i++ )
-					{
-						buttons[i].isPlaySong(false);
-					}
-				}
-				
+				}				
 				if(v.getId() == findViewById(R.id.ResumeButton).getId())
 				{
 					
@@ -139,6 +133,24 @@ public class AmbientSounds extends Activity
 							snd.resumeAll();
 
 				}
+				if(v.getId() == findViewById(R.id.PauseButton).getId())
+				{
+					for(int j = 0; j < KMAX; j++)
+					{
+						if(buttons[j].getPlay() == true)
+						{
+							buttons[j].isStopFuncion(true);
+						}
+					}
+					
+					snd.pauseAll();
+					
+					//Si se pausan los sonidos, booleano a false
+					for(int i = 0; i < KMAX; i++ )
+					{
+						buttons[i].isPlaySong(false);
+					}					
+				}
 			}
         	
         };
@@ -146,9 +158,11 @@ public class AmbientSounds extends Activity
         //Botones de Stop y Resume
         Button stopButton = (Button) findViewById(R.id.StopButton);
         Button resumeButton = (Button) findViewById(R.id.ResumeButton);
+        Button pauseButton = (Button) findViewById(R.id.PauseButton);
         
         stopButton.setOnClickListener(buttonClick);
         resumeButton.setOnClickListener(buttonClick);
+        pauseButton.setOnClickListener(buttonClick);
         
         
         
