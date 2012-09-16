@@ -57,7 +57,8 @@ Segundo Plano"
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Puedes ejecutar la aplicación en un segundo plano para poder utilizar a la vez el resto de funciones del teléfono"
+        android:text="Puedes ejecutar la aplicación en un segundo plano para poder utilizar a la vez el resto de funciones del teléfono.
+Para utilizarlo pulsa el botón Menú y después selecciona la opción de External"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>

@@ -301,24 +301,38 @@ public class AmbientSounds extends Activity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
-        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        if((keyCode == KeyEvent.KEYCODE_BACK))
+        {  	 
+        	        	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
+        	            finish();       	
+        }
+        if((keyCode == KeyEvent.KEYCODE_MENU))
         {
+        	
         	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         	
-        	alertDialog.setTitle("     Choose One");
+        	alertDialog.setTitle("     Ambiental Sounds");
         	//alertDialog.setMessage("Alis Black y Nyoron Sheppard");
         	
         	//alertDialog.setIcon(icon)
         	
-        	alertDialog.setButton("Finish", new DialogInterface.OnClickListener() 
+        	alertDialog.setButton("About", new DialogInterface.OnClickListener() 
         	{
         	      public void onClick(DialogInterface dialog, int which) 
         	      {       	 
-        	        	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
-        	            finish();
+        	    	  activityAbout();
         	      } 
         	}); 
-        	alertDialog.setButton2("Second Plane", new DialogInterface.OnClickListener() 
+        	alertDialog.setButton3("Instructions", new DialogInterface.OnClickListener() 
+        	{
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					activityInstructions();					
+				}
+			});
+        	alertDialog.setButton2("External", new DialogInterface.OnClickListener() 
         	{
 				
 				@Override
@@ -358,39 +372,7 @@ public class AmbientSounds extends Activity
 					notManager.notify(NOTIF_ALERTA_ID, notif);		
 					
 					//IMPORTANTE VER COMO FALLA LO DE SEGUNDO PLANO
-					finish();
-				}
-			});
-        	
-        	alertDialog.show();
-        	   
-        	
-        	
-        }
-        if((keyCode == KeyEvent.KEYCODE_MENU))
-        {
-        	
-        	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        	
-        	alertDialog.setTitle("     Ambiental Sounds");
-        	//alertDialog.setMessage("Alis Black y Nyoron Sheppard");
-        	
-        	//alertDialog.setIcon(icon)
-        	
-        	alertDialog.setButton("About", new DialogInterface.OnClickListener() 
-        	{
-        	      public void onClick(DialogInterface dialog, int which) 
-        	      {       	 
-        	    	  activityAbout();
-        	      } 
-        	}); 
-        	alertDialog.setButton2("Instructions", new DialogInterface.OnClickListener() 
-        	{
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) 
-				{
-					activityInstructions();					
+					finish();				
 				}
 			});
         	
