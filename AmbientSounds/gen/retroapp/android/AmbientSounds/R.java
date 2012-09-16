@@ -33,7 +33,8 @@ public final class R {
     public static final class layout {
         public static final int about=0x7f030000;
         public static final int buttonsound=0x7f030001;
-        public static final int main=0x7f030002;
+        public static final int instructions=0x7f030002;
+        public static final int main=0x7f030003;
     }
     public static final class raw {
         public static final int canarytrills=0x7f040000;
@@ -56,5 +57,6 @@ public final class R {
         public static final int app_name=0x7f050001;
         public static final int hello=0x7f050000;
         public static final int title_activity_about=0x7f050002;
+        public static final int title_activity_instructions=0x7f050003;
     }
 }

@@ -28,7 +28,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
  * Clase Principal
  * @author AlisBlack
  * @date 13/09/2012
- * @version 0.1.4
+ * @version 0.1.5
  */
 public class AmbientSounds extends Activity 
 {
@@ -346,15 +346,25 @@ public class AmbientSounds extends Activity
         	
         	alertDialog.setTitle("     Ambiental Sounds");
         	//alertDialog.setMessage("Alis Black y Nyoron Sheppard");
-
         	
-        	alertDialog.setButton("Acerca de", new DialogInterface.OnClickListener() 
+        	//alertDialog.setIcon(icon)
+        	
+        	alertDialog.setButton("About", new DialogInterface.OnClickListener() 
         	{
         	      public void onClick(DialogInterface dialog, int which) 
         	      {       	 
         	    	  activityAbout();
         	      } 
         	}); 
+        	alertDialog.setButton2("Instructions", new DialogInterface.OnClickListener() 
+        	{
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					activityInstructions();					
+				}
+			});
         	
         	alertDialog.show();
         	
@@ -387,5 +397,14 @@ public class AmbientSounds extends Activity
     {
     	Intent IntAbout = new Intent(this, About.class);
     	startActivity(IntAbout);  
+    }
+    
+    /**
+     * Metodo para cambiar a la actividad Instructions
+     */
+    public void activityInstructions()
+    {
+    	Intent IntInstrcutions = new Intent(this, Instructions.class);
+    	startActivity(IntInstrcutions);
     }
 }

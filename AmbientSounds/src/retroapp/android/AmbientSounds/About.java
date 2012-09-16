@@ -2,6 +2,7 @@ package retroapp.android.AmbientSounds;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 /**
  * Clase About
@@ -12,12 +13,22 @@ import android.os.Bundle;
 public class About extends Activity
 {
 
-		/** Called when the activity is first created. */
-		@Override
-	    public void onCreate(Bundle savedInstanceState) 
-	    {
-	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.about);
+	@Override
+	public void onCreate(Bundle savedInstanceState) 
+	{
+	    super.onCreate(savedInstanceState);
+	    setContentView(R.layout.about);
 
-	    }	
+	}	
+		
+	@Override
+	 public boolean onKeyDown(int keyCode, KeyEvent event)
+	 {
+	     if ((keyCode == KeyEvent.KEYCODE_BACK))
+	     {
+	         finish();
+         }
+	     
+			return super.onKeyDown(keyCode, event);
+	 }
 }
