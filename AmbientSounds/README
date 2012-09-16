@@ -20,6 +20,8 @@
 16/09/2012 --> SeekBar de origen general no funciona correctamente
 16/09/2012 --> SeekBar de origen general problema solucionado
 16/09/2012 --> Barra de Notificaciones
+16/09/2012 --> Instructions y About añadido
+16/09/2012 --> Finish y Second Plane añadidos
 
 
 
@@ -32,4 +34,6 @@ Errores
 2- Cuando ponemos la aplicacion en modo notificacion al volver a esta
    no funciona correctamente (como si no se guarada nada o se ejecutara
    de nuevo)
+
+3- Mirad lo de finish() cuando pasa a segundo plano
 

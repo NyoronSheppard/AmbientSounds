@@ -28,7 +28,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
  * Clase Principal
  * @author AlisBlack
  * @date 13/09/2012
- * @version 0.1.5
+ * @version 0.1.6
  */
 public class AmbientSounds extends Activity 
 {
@@ -303,41 +303,69 @@ public class AmbientSounds extends Activity
     {
         if ((keyCode == KeyEvent.KEYCODE_BACK))
         {
-        	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
-            finish();
+        	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         	
-        	//Obtenemos una referencia al servicio de notificaciones
-			/*String ns = Context.NOTIFICATION_SERVICE;
-			NotificationManager notManager = (NotificationManager) getSystemService(ns);
-			
-			//Configuramos la notificacion
-			int icono = android.R.drawable.stat_sys_warning;
-			CharSequence textoEstado = "Ambient Sounds";
-			long hora = System.currentTimeMillis();
+        	alertDialog.setTitle("     Choose One");
+        	//alertDialog.setMessage("Alis Black y Nyoron Sheppard");
+        	
+        	//alertDialog.setIcon(icon)
+        	
+        	alertDialog.setButton("Finish", new DialogInterface.OnClickListener() 
+        	{
+        	      public void onClick(DialogInterface dialog, int which) 
+        	      {       	 
+        	        	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
+        	            finish();
+        	      } 
+        	}); 
+        	alertDialog.setButton2("Second Plane", new DialogInterface.OnClickListener() 
+        	{
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					//Obtenemos una referencia al servicio de notificaciones
+					String ns = Context.NOTIFICATION_SERVICE;
+					NotificationManager notManager = (NotificationManager) getSystemService(ns);
+					
+					//Configuramos la notificacion
+					int icono = android.R.drawable.stat_sys_warning;
+					CharSequence textoEstado = "Ambient Sounds";
+					long hora = System.currentTimeMillis();
 
-			Notification notif = new Notification(icono, textoEstado, hora);
-			
-			//Configuramos el Intent
-			Context contexto = getApplicationContext();
-			CharSequence titulo = "Second Plane";
-			CharSequence descripcion = "Elisa es Cute";
-			
-			Intent notIntent = new Intent(contexto, AmbientSounds.class);
-			
-			PendingIntent contIntent = PendingIntent.getActivity(contexto, 0, notIntent, 0);
+					Notification notif = new Notification(icono, textoEstado, hora);
+					
+					//Configuramos el Intent
+					Context contexto = getApplicationContext();
+					CharSequence titulo = "Second Plane";
+					CharSequence descripcion = "Elisa es Cute";
+					
+					Intent notIntent = new Intent(contexto, AmbientSounds.class);
+					
+					PendingIntent contIntent = PendingIntent.getActivity(contexto, 0, notIntent, 0);
 
-			notif.setLatestEventInfo(contexto, titulo, descripcion, contIntent);
-			
-			//AutoCancel: cuando se pulsa la notificai�n �sta desaparece
-			notif.flags |= Notification.FLAG_AUTO_CANCEL;
-			
-			//Añadir sonido, vibracion y luces
-			//notif.defaults |= Notification.DEFAULT_SOUND;
-			//notif.defaults |= Notification.DEFAULT_VIBRATE;
-			//notif.defaults |= Notification.DEFAULT_LIGHTS;
-			
-			//Enviar notificacion
-			notManager.notify(NOTIF_ALERTA_ID, notif);*/
+					notif.setLatestEventInfo(contexto, titulo, descripcion, contIntent);
+					
+					//AutoCancel: cuando se pulsa la notificai�n �sta desaparece
+					notif.flags |= Notification.FLAG_AUTO_CANCEL;
+					
+					//Añadir sonido, vibracion y luces
+					//notif.defaults |= Notification.DEFAULT_SOUND;
+					//notif.defaults |= Notification.DEFAULT_VIBRATE;
+					//notif.defaults |= Notification.DEFAULT_LIGHTS;
+					
+					//Enviar notificacion
+					notManager.notify(NOTIF_ALERTA_ID, notif);		
+					
+					//IMPORTANTE VER COMO FALLA LO DE SEGUNDO PLANO
+					finish();
+				}
+			});
+        	
+        	alertDialog.show();
+        	   
+        	
+        	
         }
         if((keyCode == KeyEvent.KEYCODE_MENU))
         {
