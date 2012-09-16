@@ -20,6 +20,8 @@ public final class R {
         public static final int ResumeButton=0x7f06000c;
         public static final int StopButton=0x7f06000b;
         public static final int VolBar1=0x7f06000a;
+        public static final int about=0x7f06000f;
+        public static final int instructions=0x7f060010;
         public static final int seekBVolume=0x7f060009;
         public static final int textView1=0x7f060000;
         public static final int textView2=0x7f060001;
@@ -35,6 +37,7 @@ public final class R {
         public static final int buttonsound=0x7f030001;
         public static final int instructions=0x7f030002;
         public static final int main=0x7f030003;
+        public static final int menu=0x7f030004;
     }
     public static final class raw {
         public static final int canarytrills=0x7f040000;

@@ -13,6 +13,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -22,6 +25,7 @@ import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 /**
@@ -302,37 +306,23 @@ public class AmbientSounds extends Activity
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
         if((keyCode == KeyEvent.KEYCODE_BACK))
-        {  	 
-        	        	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
-        	            finish();       	
-        }
-        if((keyCode == KeyEvent.KEYCODE_MENU))
         {
-        	
         	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         	
-        	alertDialog.setTitle("     Ambiental Sounds");
+        	alertDialog.setTitle("¿Desea segundo plano?");
         	//alertDialog.setMessage("Alis Black y Nyoron Sheppard");
         	
         	//alertDialog.setIcon(icon)
         	
-        	alertDialog.setButton("About", new DialogInterface.OnClickListener() 
+        	alertDialog.setButton2("No", new DialogInterface.OnClickListener() 
         	{
         	      public void onClick(DialogInterface dialog, int which) 
         	      {       	 
-        	    	  activityAbout();
+        	        	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
+        	            finish();
         	      } 
         	}); 
-        	alertDialog.setButton3("Instructions", new DialogInterface.OnClickListener() 
-        	{
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) 
-				{
-					activityInstructions();					
-				}
-			});
-        	alertDialog.setButton2("External", new DialogInterface.OnClickListener() 
+        	alertDialog.setButton("Si", new DialogInterface.OnClickListener() 
         	{
 				
 				@Override
@@ -372,33 +362,84 @@ public class AmbientSounds extends Activity
 					notManager.notify(NOTIF_ALERTA_ID, notif);		
 					
 					//IMPORTANTE VER COMO FALLA LO DE SEGUNDO PLANO
-					finish();				
+					finish();
 				}
 			});
         	
         	alertDialog.show();
         	
         }
+        /*if((keyCode == KeyEvent.KEYCODE_MENU))
+        {
+        	
+        	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        	
+        	alertDialog.setTitle("     Ambiental Sounds");
+        	//alertDialog.setMessage("Alis Black y Nyoron Sheppard");
+        	
+        	//alertDialog.setIcon(icon)
+        	
+        	alertDialog.setButton("About", new DialogInterface.OnClickListener() 
+        	{
+        	      public void onClick(DialogInterface dialog, int which) 
+        	      {       	 
+        	    	  activityAbout();
+        	      } 
+        	}); 
+        	alertDialog.setButton2("Instructions", new DialogInterface.OnClickListener() 
+        	{
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					activityInstructions();					
+				}
+			});
+        	alertDialog.setButton3("Instructions", new DialogInterface.OnClickListener() 
+        	{
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					activityInstructions();					
+				}
+			});
+        	
+        	alertDialog.show();
+        	
+        }*/
         
         return super.onKeyDown(keyCode, event);
     }
     
-/*    //cuando pasa a segundo plano la aplicacion
+    /**
+     * Crea el Menu de Button Menu
+     */
     @Override
-    protected void onPause() 
+    public boolean onCreateOptionsMenu(Menu menu) 
     {
-    	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
-        finish();
-    	super.onPause();
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.layout.menu, menu);
+        return true;
     }
-    //cuando se destruye la aplicacion
+
+    /**
+     * Selecciona uno de los botones
+     */
     @Override
-    protected void onStop()
+    public boolean onOptionsItemSelected(MenuItem item) 
     {
-    	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
-        finish();
-    	super.onStop();
-    }*/
+        switch (item.getItemId()) 
+        {
+            case R.id.about:     
+            					activityAbout();
+                                break;
+            case R.id.instructions:     
+            					activityInstructions();
+                                break;
+        }
+        return true;
+    }
     
     /**
      * Metodo para cambiar a la actividad About
@@ -417,4 +458,23 @@ public class AmbientSounds extends Activity
     	Intent IntInstrcutions = new Intent(this, Instructions.class);
     	startActivity(IntInstrcutions);
     }
+    
+    /*    //cuando pasa a segundo plano la aplicacion
+    @Override
+    protected void onPause() 
+    {
+    	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
+        finish();
+    	super.onPause();
+    }
+    //cuando se destruye la aplicacion
+    @Override
+    protected void onStop()
+    {
+    	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
+        finish();
+    	super.onStop();
+    }*/
+    
+
 }
