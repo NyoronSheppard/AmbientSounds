@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World, AmbientSounds!</string>
     <string name="app_name">AmbientSounds</string>
+    <string name="title_activity_about">About</string>
 
 </resources>

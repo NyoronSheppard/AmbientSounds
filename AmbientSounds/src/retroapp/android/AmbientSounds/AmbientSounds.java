@@ -1,13 +1,16 @@
 package retroapp.android.AmbientSounds;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +28,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
  * Clase Principal
  * @author AlisBlack
  * @date 13/09/2012
- * @version 0.1.3
+ * @version 0.1.4
  */
 public class AmbientSounds extends Activity 
 {
@@ -44,12 +47,12 @@ public class AmbientSounds extends Activity
 	SoundManager snd;
 	AudioManager audioManager;
 	
-    OnSeekBarChangeListener barChangeMaster;
+    OnSeekBarChangeListener barChangeMaster;   
+
     
-		
 	//TextView seleccionado;
 	ListView lstOpciones;
-		
+	
 	//Métodos de la clase	
 	
     /** Called when the activity is first created. */
@@ -106,11 +109,9 @@ public class AmbientSounds extends Activity
         
         buttonClick = new OnClickListener()
         {
-
 			@Override
 			public void onClick(View v) 
 			{
-
 				if(v.getId() == findViewById(R.id.StopButton).getId())
 				{
 					for(int j = 0; j < KMAX; j++)
@@ -121,12 +122,10 @@ public class AmbientSounds extends Activity
 							buttons[j].isPlaySong(false);
 							buttons[j].isPauseFuncion(false);
 						}
-					}
-					
+					}					
 				}				
 				if(v.getId() == findViewById(R.id.ResumeButton).getId())
-				{
-					
+				{					
 					for(int j = 0; j < KMAX; j++)
 					{
 						if(buttons[j].getPauseFuncion() == true)
@@ -134,9 +133,7 @@ public class AmbientSounds extends Activity
 							buttons[j].isPlaySong(true); //Para poder parar el sonido en modo Resume
 						}
 					}
-
 							snd.resumeAll();
-
 				}
 				if(v.getId() == findViewById(R.id.PauseButton).getId())
 				{
@@ -156,8 +153,7 @@ public class AmbientSounds extends Activity
 						buttons[i].isPlaySong(false);
 					}					
 				}
-			}
-        	
+			}       	
         };
         
         //Botones de Stop y Resume
@@ -167,10 +163,7 @@ public class AmbientSounds extends Activity
         
         stopButton.setOnClickListener(buttonClick);
         resumeButton.setOnClickListener(buttonClick);
-        pauseButton.setOnClickListener(buttonClick);
-        
-        
-        
+        pauseButton.setOnClickListener(buttonClick);       
     }
     
     /**
@@ -346,6 +339,27 @@ public class AmbientSounds extends Activity
 			//Enviar notificacion
 			notManager.notify(NOTIF_ALERTA_ID, notif);*/
         }
+        if((keyCode == KeyEvent.KEYCODE_MENU))
+        {
+        	
+        	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        	
+        	alertDialog.setTitle("     Ambiental Sounds");
+        	//alertDialog.setMessage("Alis Black y Nyoron Sheppard");
+
+        	
+        	alertDialog.setButton("Acerca de", new DialogInterface.OnClickListener() 
+        	{
+        	      public void onClick(DialogInterface dialog, int which) 
+        	      {       	 
+        	    	  activityAbout();
+        	      } 
+        	}); 
+        	
+        	alertDialog.show();
+        	
+        }
+        
         return super.onKeyDown(keyCode, event);
     }
     
@@ -365,4 +379,13 @@ public class AmbientSounds extends Activity
         finish();
     	super.onStop();
     }*/
+    
+    /**
+     * Metodo para cambiar a la actividad About
+     */
+    public void activityAbout()
+    {
+    	Intent IntAbout = new Intent(this, About.class);
+    	startActivity(IntAbout);  
+    }
 }
