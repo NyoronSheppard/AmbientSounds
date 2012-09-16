@@ -99,9 +99,14 @@ public class SoundManager
 			rightVolume = masterVolume;
 			leftVolume = masterVolume * ( 2.0f - balance );
         }
- 
+
     }
     
+    /**
+     * Metodo para controlar el volumen de un solo sonido
+     * @param streamID Id del sonido que se esta escuchando
+     * @param volume Volumen del sonido
+     */
     public void setVolumeSong(int streamID, float volume)
     {
     	sndPool.setVolume(streamID, volume, volume);

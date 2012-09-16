@@ -1,6 +1,7 @@
 package retroapp.android.AmbientSounds;
 
 import android.app.Activity;
+import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -20,7 +21,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
  * Clase Principal
  * @author AlisBlack
  * @date 13/09/2012
- * @version 0.1.1
+ * @version 0.1.2
  */
 public class AmbientSounds extends Activity 
 {
@@ -36,6 +37,7 @@ public class AmbientSounds extends Activity
 	OnClickListener buttonClick;
 
 	SoundManager snd;
+	AudioManager audioManager;
 	
     OnSeekBarChangeListener barChangeMaster;
     
@@ -75,7 +77,14 @@ public class AmbientSounds extends Activity
         
         lstOpciones.setTextFilterEnabled(true);
         
-        barChangeMaster = new OnSeekBarChangeListener()
+        audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        int curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        
+        SeekBar volControl = (SeekBar)findViewById(R.id.VolBar1);
+        volControl.setMax(maxVolume);
+        volControl.setProgress(curVolume);
+        volControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {	}
@@ -86,19 +95,9 @@ public class AmbientSounds extends Activity
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
 			{
-				//Para no confundir con el resto de las SeekBar
-				switch (seekBar.getId())
-				{
-				 case R.id.VolBar1:					 
-				  snd.setVolume((float)progress/100);
-					 break;
-				}
+				audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
 			}
-		};
-		
-		SeekBar sb;
-        sb = (SeekBar) findViewById(R.id.VolBar1);
-        sb.setOnSeekBarChangeListener(barChangeMaster);
+		});
         
         buttonClick = new OnClickListener()
         {
@@ -144,7 +143,7 @@ public class AmbientSounds extends Activity
         	
         };
         
-        //Boton de Stop
+        //Botones de Stop y Resume
         Button stopButton = (Button) findViewById(R.id.StopButton);
         Button resumeButton = (Button) findViewById(R.id.ResumeButton);
         
