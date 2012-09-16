@@ -20,7 +20,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
  * Clase Principal
  * @author AlisBlack
  * @date 13/09/2012
- * @version 0.0.9
+ * @version 0.1.1
  */
 public class AmbientSounds extends Activity 
 {
@@ -36,9 +36,11 @@ public class AmbientSounds extends Activity
 	OnClickListener buttonClick;
 
 	SoundManager snd;
-	OnSeekBarChangeListener barChange;
+	
+    OnSeekBarChangeListener barChangeMaster;
+    
 		
-	TextView seleccionado;
+	//TextView seleccionado;
 	ListView lstOpciones;
 		
 	//Métodos de la clase	
@@ -53,7 +55,7 @@ public class AmbientSounds extends Activity
         AdaptadorButtons adaptador = new AdaptadorButtons(this);
         
         lstOpciones = (ListView)findViewById(R.id.LstOpciones);
-        seleccionado = (TextView)findViewById(R.id.seleccionado);
+        //seleccionado = (TextView)findViewById(R.id.seleccionado);
         
         snd = new SoundManager(getApplicationContext());
         
@@ -72,6 +74,85 @@ public class AmbientSounds extends Activity
         }
         
         lstOpciones.setTextFilterEnabled(true);
+        
+        barChangeMaster = new OnSeekBarChangeListener()
+        {
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {	}
+ 
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {  }
+ 
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+			{
+				//Para no confundir con el resto de las SeekBar
+				switch (seekBar.getId())
+				{
+				 case R.id.VolBar1:					 
+				  snd.setVolume((float)progress/100);
+					 break;
+				}
+			}
+		};
+		
+		SeekBar sb;
+        sb = (SeekBar) findViewById(R.id.VolBar1);
+        sb.setOnSeekBarChangeListener(barChangeMaster);
+        
+        buttonClick = new OnClickListener()
+        {
+
+			@Override
+			public void onClick(View v) 
+			{
+
+				if(v.getId() == findViewById(R.id.StopButton).getId())
+				{
+					for(int j = 0; j < KMAX; j++)
+					{
+						if(buttons[j].getPlay() == true)
+						{
+							buttons[j].isStopFuncion(true);
+						}
+					}
+					
+					snd.pauseAll();
+					
+					//Si se pausan los sonidos, booleano a false
+					for(int i = 0; i < KMAX; i++ )
+					{
+						buttons[i].isPlaySong(false);
+					}
+				}
+				
+				if(v.getId() == findViewById(R.id.ResumeButton).getId())
+				{
+					
+					for(int j = 0; j < KMAX; j++)
+					{
+						if(buttons[j].getStopFuncion() == true)
+						{
+							buttons[j].isPlaySong(true); //Para poder parar el sonido en modo Resume
+						}
+					}
+
+							snd.resumeAll();
+
+				}
+			}
+        	
+        };
+        
+        //Boton de Stop
+        Button stopButton = (Button) findViewById(R.id.StopButton);
+        Button resumeButton = (Button) findViewById(R.id.ResumeButton);
+        
+        stopButton.setOnClickListener(buttonClick);
+        resumeButton.setOnClickListener(buttonClick);
+        
+        
+        
     }
     
     /**
@@ -140,7 +221,9 @@ public class AmbientSounds extends Activity
                 holder.titlesound.setOnClickListener(this);
                 holder.volume.setProgress(100);
                 holder.volume.setTag(position);
-                holder.volume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+                
+                holder.volume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() 
+                {
 					
 					@Override
 					public void onStopTrackingTouch(SeekBar seekBar) 
@@ -178,7 +261,7 @@ public class AmbientSounds extends Activity
             	int position = (Integer)v.getTag(); 
             	//int idPlay;
             	
-            	seleccionado.setText("Has seleccionado: \n" + buttons[position].getTitleSound()); 
+            	//seleccionado.setText("Has seleccionado: \n" + buttons[position].getTitleSound()); 
             	
             	if(buttons[position].getPlay() == false)
             	{
@@ -217,14 +300,16 @@ public class AmbientSounds extends Activity
     
     //cuando pasa a segundo plano la aplicacion
     @Override
-    protected void onPause() {
+    protected void onPause() 
+    {
     	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
         finish();
     	super.onPause();
     }
     //cuando se destruye la aplicacion
     @Override
-    protected void onStop() {
+    protected void onStop()
+    {
     	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
         finish();
     	super.onStop();

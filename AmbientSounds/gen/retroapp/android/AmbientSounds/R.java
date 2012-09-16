@@ -15,9 +15,11 @@ public final class R {
     }
     public static final class id {
         public static final int LblTitulo=0x7f060000;
-        public static final int LstOpciones=0x7f060003;
+        public static final int LstOpciones=0x7f060005;
+        public static final int ResumeButton=0x7f060004;
+        public static final int StopButton=0x7f060003;
+        public static final int VolBar1=0x7f060002;
         public static final int seekBVolume=0x7f060001;
-        public static final int seleccionado=0x7f060002;
     }
     public static final class layout {
         public static final int buttonsound=0x7f030000;

@@ -4,7 +4,7 @@ package retroapp.android.AmbientSounds;
 * Clase Button
 * @author AlisBlack
 * @date 13/09/2012
-* @version 0.0.8
+* @version 0.1.0
 */
 public class ButtonSound 
 {
@@ -15,6 +15,7 @@ public class ButtonSound
 	private int id;
 	private int streamId;
 	private boolean isPlay;
+	private boolean isStop; //Booleano de la funcion stopAll, utilizada tambien en resumeAll
 	private Float volume;
 
 
@@ -33,7 +34,8 @@ public class ButtonSound
 		this.id = -1;
 		this.isPlay = false;
 		this.streamId = -1;
-		this.volume=0.0f;
+		this.volume = 0.0f;
+		this.isStop = false;
 	}
 
 
@@ -88,6 +90,15 @@ public class ButtonSound
 	public Float getVolume() {
 		return volume;
 	}
+	
+	/**
+	 * Metodo para obtener si ha entrado en la funcion stopAll o no
+	 * @return isStop Booleano
+	 */
+	public boolean getStopFuncion()
+	{
+		return (isStop);
+	}
 
 	/**
 	 * Metodo para cambiar la id
@@ -132,6 +143,15 @@ public class ButtonSound
 	public void isPlaySong(boolean isPlay)
 	{
 		this.isPlay = isPlay;
+	}
+	
+	/**
+	 * Metodo para ver si ha entrado en la funcion o no
+	 * @param isStop
+	 */
+	public void isStopFuncion(boolean isStop)
+	{
+		this.isStop = isStop;
 	}
 	
 
