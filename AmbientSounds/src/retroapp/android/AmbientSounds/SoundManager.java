@@ -8,7 +8,7 @@ import android.media.SoundPool;
  * Clase encargada de administrar el sonido
  * @author AlisBlack
  * @date   13/09/2012
- * @version 0.1.8
+ * @version 0.1.9
  */
 public class SoundManager 
 {
@@ -33,7 +33,8 @@ public class SoundManager
 	   	pContext = appContext;
 	}
 	    
-
+	//Metodos
+	
 	/**
 	 * Cargar sonido
 	 * @param sound_id Identificador del sonido
@@ -62,6 +63,7 @@ public class SoundManager
     {
     	sndPool.stop(sound_id);
     }
+    
     
     /**
      * Repite el sonido
@@ -97,9 +99,14 @@ public class SoundManager
 			rightVolume = masterVolume;
 			leftVolume = masterVolume * ( 2.0f - balance );
         }
- 
+
     }
     
+    /**
+     * Metodo para controlar el volumen de un solo sonido
+     * @param streamID Id del sonido que se esta escuchando
+     * @param volume Volumen del sonido
+     */
     public void setVolumeSong(int streamID, float volume)
     {
     	sndPool.setVolume(streamID, volume, volume);
@@ -132,6 +139,22 @@ public class SoundManager
     {
     	balance = balVal;
     	setVolume(masterVolume);
+    }
+    
+    /**
+     * Metodo para pausarlo todo
+     */
+    public void pauseAll()
+    {
+    	sndPool.autoPause();
+    }
+    
+    /**
+     * Metodo para volver a sonar
+     */
+    public void resumeAll()
+    {
+    	sndPool.autoResume();
     }
 	    
 

@@ -4,17 +4,56 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-    
-<TextView  android:id="@+id/seleccionado"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="Selecciona una opción:" 
-    />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <SeekBar
+        	android:id="@+id/VolBar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="25px"
+            android:max="100"
+            android:progress="100" 
+            />
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+
+       	 	<Button
+            	android:id="@+id/StopButton"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="Stop" 
+            	/>
+
+        	<Button
+            	android:id="@+id/ResumeButton"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="Resume"
+            	/>
+
+        	<Button
+            	android:id="@+id/PauseButton"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="Pause" 
+            	/>
+            
+        </LinearLayout>        
+
+    </LinearLayout>
 
 <ListView android:id="@+id/LstOpciones" 
 	android:layout_width="fill_parent" 
 	android:layout_height="wrap_content" 
 	/>
-
 
 </LinearLayout>

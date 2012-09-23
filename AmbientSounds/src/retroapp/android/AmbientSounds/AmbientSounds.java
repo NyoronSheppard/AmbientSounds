@@ -1,10 +1,21 @@
 package retroapp.android.AmbientSounds;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -14,18 +25,20 @@ import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 /**
  * Clase Principal
  * @author AlisBlack
  * @date 13/09/2012
- * @version 0.0.9
+ * @version 0.1.7
  */
 public class AmbientSounds extends Activity 
 {
 	//Constantes
 	public final int KMAX = 15;
+	private static final int NOTIF_ALERTA_ID = 1;
 		
 		
 	//Variables	
@@ -36,11 +49,14 @@ public class AmbientSounds extends Activity
 	OnClickListener buttonClick;
 
 	SoundManager snd;
-	OnSeekBarChangeListener barChange;
-		
-	TextView seleccionado;
+	AudioManager audioManager;
+	
+    OnSeekBarChangeListener barChangeMaster;   
+
+    
+	//TextView seleccionado;
 	ListView lstOpciones;
-		
+	
 	//Métodos de la clase	
 	
     /** Called when the activity is first created. */
@@ -53,7 +69,7 @@ public class AmbientSounds extends Activity
         AdaptadorButtons adaptador = new AdaptadorButtons(this);
         
         lstOpciones = (ListView)findViewById(R.id.LstOpciones);
-        seleccionado = (TextView)findViewById(R.id.seleccionado);
+        //seleccionado = (TextView)findViewById(R.id.seleccionado);
         
         snd = new SoundManager(getApplicationContext());
         
@@ -72,6 +88,86 @@ public class AmbientSounds extends Activity
         }
         
         lstOpciones.setTextFilterEnabled(true);
+        
+        audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        int curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        
+        SeekBar volControl = (SeekBar)findViewById(R.id.VolBar1);
+        volControl.setMax(maxVolume);
+        volControl.setProgress(curVolume);
+        volControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        {
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {	}
+ 
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {  }
+ 
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+			{
+				audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+			}
+		});
+        
+        buttonClick = new OnClickListener()
+        {
+			@Override
+			public void onClick(View v) 
+			{
+				if(v.getId() == findViewById(R.id.StopButton).getId())
+				{
+					for(int j = 0; j < KMAX; j++)
+					{
+						if(buttons[j].getStreamId() != -1)
+						{
+							snd.setStop(buttons[j].getStreamId());
+							buttons[j].isPlaySong(false);
+							buttons[j].isPauseFuncion(false);
+						}
+					}					
+				}				
+				if(v.getId() == findViewById(R.id.ResumeButton).getId())
+				{					
+					for(int j = 0; j < KMAX; j++)
+					{
+						if(buttons[j].getPauseFuncion() == true)
+						{
+							buttons[j].isPlaySong(true); //Para poder parar el sonido en modo Resume
+						}
+					}
+							snd.resumeAll();
+				}
+				if(v.getId() == findViewById(R.id.PauseButton).getId())
+				{
+					for(int j = 0; j < KMAX; j++)
+					{
+						if(buttons[j].getPlay() == true)
+						{
+							buttons[j].isPauseFuncion(true);
+						}
+					}
+					
+					snd.pauseAll();
+					
+					//Si se pausan los sonidos, booleano a false
+					for(int i = 0; i < KMAX; i++ )
+					{
+						buttons[i].isPlaySong(false);
+					}					
+				}
+			}       	
+        };
+        
+        //Botones de Stop y Resume
+        Button stopButton = (Button) findViewById(R.id.StopButton);
+        Button resumeButton = (Button) findViewById(R.id.ResumeButton);
+        Button pauseButton = (Button) findViewById(R.id.PauseButton);
+        
+        stopButton.setOnClickListener(buttonClick);
+        resumeButton.setOnClickListener(buttonClick);
+        pauseButton.setOnClickListener(buttonClick);       
     }
     
     /**
@@ -140,7 +236,9 @@ public class AmbientSounds extends Activity
                 holder.titlesound.setOnClickListener(this);
                 holder.volume.setProgress(100);
                 holder.volume.setTag(position);
-                holder.volume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+                
+                holder.volume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() 
+                {
 					
 					@Override
 					public void onStopTrackingTouch(SeekBar seekBar) 
@@ -178,7 +276,7 @@ public class AmbientSounds extends Activity
             	int position = (Integer)v.getTag(); 
             	//int idPlay;
             	
-            	seleccionado.setText("Has seleccionado: \n" + buttons[position].getTitleSound()); 
+            	//seleccionado.setText("Has seleccionado: \n" + buttons[position].getTitleSound()); 
             	
             	if(buttons[position].getPlay() == false)
             	{
@@ -207,26 +305,176 @@ public class AmbientSounds extends Activity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
-        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        if((keyCode == KeyEvent.KEYCODE_BACK))
         {
-        	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
-            finish();
+        	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        	
+        	alertDialog.setTitle("¿Desea segundo plano?");
+        	//alertDialog.setMessage("Alis Black y Nyoron Sheppard");
+        	
+        	//alertDialog.setIcon(icon)
+        	
+        	alertDialog.setButton2("No", new DialogInterface.OnClickListener() 
+        	{
+        	      public void onClick(DialogInterface dialog, int which) 
+        	      {       	 
+        	        	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
+        	            finish();
+        	      } 
+        	}); 
+        	alertDialog.setButton("Si", new DialogInterface.OnClickListener() 
+        	{
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					//Obtenemos una referencia al servicio de notificaciones
+					String ns = Context.NOTIFICATION_SERVICE;
+					NotificationManager notManager = (NotificationManager) getSystemService(ns);
+					
+					//Configuramos la notificacion
+					int icono = android.R.drawable.stat_sys_warning;
+					CharSequence textoEstado = "Ambient Sounds";
+					long hora = System.currentTimeMillis();
+
+					Notification notif = new Notification(icono, textoEstado, hora);
+					
+					//Configuramos el Intent
+					Context contexto = getApplicationContext();
+					CharSequence titulo = "Second Plane";
+					CharSequence descripcion = "Elisa es Cute";
+					
+					Intent notIntent = new Intent(contexto, AmbientSounds.class);
+					
+					PendingIntent contIntent = PendingIntent.getActivity(contexto, 0, notIntent, 0);
+
+					notif.setLatestEventInfo(contexto, titulo, descripcion, contIntent);
+					
+					//AutoCancel: cuando se pulsa la notificai�n �sta desaparece
+					notif.flags |= Notification.FLAG_AUTO_CANCEL;
+					
+					//Añadir sonido, vibracion y luces
+					//notif.defaults |= Notification.DEFAULT_SOUND;
+					//notif.defaults |= Notification.DEFAULT_VIBRATE;
+					//notif.defaults |= Notification.DEFAULT_LIGHTS;
+					
+					//Enviar notificacion
+					notManager.notify(NOTIF_ALERTA_ID, notif);		
+					
+					//IMPORTANTE VER COMO FALLA LO DE SEGUNDO PLANO
+					finish();
+				}
+			});
+        	
+        	alertDialog.show();
+        	
         }
+        /*if((keyCode == KeyEvent.KEYCODE_MENU))
+        {
+        	
+        	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        	
+        	alertDialog.setTitle("     Ambiental Sounds");
+        	//alertDialog.setMessage("Alis Black y Nyoron Sheppard");
+        	
+        	//alertDialog.setIcon(icon)
+        	
+        	alertDialog.setButton("About", new DialogInterface.OnClickListener() 
+        	{
+        	      public void onClick(DialogInterface dialog, int which) 
+        	      {       	 
+        	    	  activityAbout();
+        	      } 
+        	}); 
+        	alertDialog.setButton2("Instructions", new DialogInterface.OnClickListener() 
+        	{
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					activityInstructions();					
+				}
+			});
+        	alertDialog.setButton3("Instructions", new DialogInterface.OnClickListener() 
+        	{
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					activityInstructions();					
+				}
+			});
+        	
+        	alertDialog.show();
+        	
+        }*/
+        
         return super.onKeyDown(keyCode, event);
     }
     
-    //cuando pasa a segundo plano la aplicacion
+    /**
+     * Crea el Menu de Button Menu
+     */
     @Override
-    protected void onPause() {
+    public boolean onCreateOptionsMenu(Menu menu) 
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.layout.menu, menu);
+        return true;
+    }
+
+    /**
+     * Selecciona uno de los botones
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) 
+    {
+        switch (item.getItemId()) 
+        {
+            case R.id.about:     
+            					activityAbout();
+                                break;
+            case R.id.instructions:     
+            					activityInstructions();
+                                break;
+        }
+        return true;
+    }
+    
+    /**
+     * Metodo para cambiar a la actividad About
+     */
+    public void activityAbout()
+    {
+    	Intent IntAbout = new Intent(this, About.class);
+    	startActivity(IntAbout);  
+    }
+    
+    /**
+     * Metodo para cambiar a la actividad Instructions
+     */
+    public void activityInstructions()
+    {
+    	Intent IntInstrcutions = new Intent(this, Instructions.class);
+    	startActivity(IntInstrcutions);
+    }
+    
+    /*    //cuando pasa a segundo plano la aplicacion
+    @Override
+    protected void onPause() 
+    {
     	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
         finish();
     	super.onPause();
     }
     //cuando se destruye la aplicacion
     @Override
-    protected void onStop() {
+    protected void onStop()
+    {
     	snd.unloadAll(); //Eliminamos de la memoria todas las canciones
         finish();
     	super.onStop();
-    }
+    }*/
+    
+
 }
